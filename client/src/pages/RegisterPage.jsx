@@ -20,28 +20,19 @@ const RegisterPage = () => {
     setPassword(e.target.value);
   };
 
-  const registerUser = async (e) => {
+  const registerUserHandler = async (e) => {
     e.preventDefault();
-    const data = {
-      name,
-      email,
-      password,
-    };
-    console.log(data);
-
     try {
       // console.log("ASS", process.env.SERVER_BASE_URL) // remove this after you've confirmed it is working
-
-      const res = await axios.post(`/api/registry`, {
+      await axios.post(`/api/registry`, {
         name,
         email,
         password,
       });
-      if (res.ok) {
-        console.log('OK');
-      }
+
+      alert('Registration successful. Now you can log in');
     } catch (err) {
-      console.log('ERROR TO SEND REGISTRY DATA: ', err);
+      alert('Email already in use...');
     }
   };
 
@@ -50,7 +41,7 @@ const RegisterPage = () => {
       <div className="mt-4 grow flex items-center justify-around">
         <div className="mb-64">
           <h1 className="text-4xl text-center mb-4">Register</h1>
-          <form className="max-w-md mx-auto" onSubmit={registerUser}>
+          <form className="max-w-md mx-auto" onSubmit={registerUserHandler}>
             <input
               type="text"
               placeholder="John Doe"

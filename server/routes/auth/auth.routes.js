@@ -52,4 +52,9 @@ Router.post('/registry', async (req, res) => {
   }
 });
 
+
+Router.post("/logout", (req, res)=>{
+  res.cookie("token", "").json({message: "logout"})
+})
+
 module.exports = Router;

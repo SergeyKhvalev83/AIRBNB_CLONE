@@ -5,7 +5,8 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const authRoutes = require('./routes/auth/auth.routes');
-const userProfileToken = require('./routes/user.profile.routes')
+const userProfileToken = require('./routes/user.profile.routes');
+const uploadImgByLinkRoutes = require('./routes/uploads.routes')
 
 const app = express();
 const PORT = 5001;
@@ -25,7 +26,8 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 
 app.use('/api', authRoutes);
-app.use('/api', userProfileToken)
+app.use('/api', userProfileToken);
+app.use('/api', uploadImgByLinkRoutes);
 
 app.listen(PORT, () => {
   console.log('Server listening on port 5001');

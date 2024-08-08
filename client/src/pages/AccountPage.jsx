@@ -31,11 +31,11 @@ const AccountPage = () => {
     console.log('redirect after logout ', redirect);
   };
 
-  if (!ready) {
-    return 'loading...';
-  }
+  // if (!ready) {
+  //   return 'loading...';
+  // }
 
-  if (ready && !user & !redirect) {
+  if (!user & !redirect) {//ready && 
     return <Navigate to={'/login'} />;
   }
 

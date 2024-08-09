@@ -8,14 +8,12 @@ const jwtSecret = 'SergeyKatEv';
 
 Router.get('/profile', (req, res) => {
   const { token } = req.cookies;
-  console.log("CCC: ", token)
 
   if(token){
     jwt.verify(token, jwtSecret, {}, async (err, user)=>{
       if(err){
         throw err
       } else {
-        console.log(user)
         const {name, email, _id} = await User.findById(user.id);
         res.json({name, email, _id})
       }

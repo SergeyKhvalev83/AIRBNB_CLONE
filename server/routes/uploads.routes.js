@@ -29,8 +29,6 @@ Router.post('/uploads', photosMiddleware.array('photos', 100), (req, res) => {
   try {
     const { files } = req;
 
-    const str = '"uploads\\" path\\to\\file';
-
     const arraOfRanemedPhotos = [];
     for (let each of files) {
       const { path } = each;

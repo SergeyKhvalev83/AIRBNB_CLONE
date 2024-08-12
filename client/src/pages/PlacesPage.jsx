@@ -1,8 +1,17 @@
-import {} from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import NavigationComponent from '../components/NavigationComponent';
 
 const PlacesPage = () => {
+  const [myPlaces, setMyPlaces] = useState([]);
+
+  useEffect(() => {
+    axios.get('/api/my-places').then(({ data }) => {
+      setMyPlaces(data);
+    });
+  }, []);
+
   return (
     <div>
       <NavigationComponent />
@@ -26,6 +35,35 @@ const PlacesPage = () => {
           </svg>
           Add new place
         </Link>
+        <div className="mt-4">
+          {myPlaces.length > 0 &&
+            myPlaces.map((eachPlace) => (
+              <Link
+                to={'/account/my-places/' + eachPlace._id}
+                key={eachPlace._id}
+                className="flex cursor-pointer gap-4 bg-gray-100 p-4 rounded-2xl"
+              >
+                <div>
+                  {eachPlace.photos.length > 0 &&
+                    eachPlace.photos.map((eachPhoto) => (
+                      <div
+                        key={eachPhoto}
+                        className="flex justify-center w-32 h-32 bg-gray-300 shrink-0"
+                      >
+                        <img className='object-cover'
+                          src={`http://localhost:5001/uploads/${eachPhoto}`}
+                          alt="my-place-photo"
+                        />
+                      </div>
+                    ))}
+                </div>
+                <div className="text-justify">
+                  <h2 className="text-xl">{eachPlace.title}</h2>
+                  <p className="text-sm mt-2">{eachPlace.description}</p>
+                </div>
+              </Link>
+            ))}
+        </div>
       </div>
     </div>
   );

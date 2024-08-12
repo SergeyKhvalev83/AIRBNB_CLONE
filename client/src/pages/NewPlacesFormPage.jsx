@@ -1,10 +1,13 @@
-import { useState } from 'react';
-import {  } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import PhotosUploaders from '../components/PhotosUploaders';
 import PerksComponent from '../components/PerksComponent';
+import NavigationComponent from '../components/NavigationComponent';
 
 const NewPlacesFormPage = () => {
+  const { id } = useParams();
+  console.log('ID FROM PARAMS: ', id);
   const [title, setTitle] = useState('');
   const [address, setAddress] = useState('');
   const [addedPhotos, setAddedPhotos] = useState([]);
@@ -33,7 +36,8 @@ const NewPlacesFormPage = () => {
     );
   };
 
-  const addNewPlaseHandler = async (ev) => {
+  const savePlaceHandler = async (ev) => {
+    // we use same component to update existed place (if id params presented) and add new place
     ev.preventDefault();
     const placeData = {
       title,
@@ -46,18 +50,45 @@ const NewPlacesFormPage = () => {
       checkOut,
       maxGuests,
     };
-    console.log('BASE BODY: ', placeData);
-    const response = await axios.post('/api/my-places', { placeData });
-    console.log('RESPONSE: ', response);
 
-    // setRedirect('/account/places');
+    if (id) {
+      // to update existed place
+      console.log("UPDATE: ", id)
+      await axios.put(`/api/update-my-place/${id}`, { id, ...placeData });
+    } else {
+      // to add new place
+      await axios.post('/api/post-my-places', placeData);
+      setRedirect('/account/places');
+    }
   };
 
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    //we make that request ti set up all data in relevant fields in order to refactor it
+    axios.get(`/api/place/${id}`).then((response) => {
+      const { data } = response;
+      setTitle(data.title);
+      setAddress(data.address);
+      setAddedPhotos(data.photos);
+      setDescription(data.description);
+      setPerks(data.perks);
+      setExtraInfo(data.extraInfo);
+      setCheckIn(data.checkIn);
+      setCheckOut(data.checkOut);
+      setMaxGuests(data.maxGuests);
+    });
+  }, [id]);
 
+  if (redirect) {
+    return <Navigate to={redirect} />;
+  }
 
   return (
     <div>
-      <form onSubmit={addNewPlaseHandler}>
+      <NavigationComponent />
+      <form onSubmit={savePlaceHandler}>
         {preInput('Title', 'Title for your place. Should be short and catchy')}
         <input
           type="text"

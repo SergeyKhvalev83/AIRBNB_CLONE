@@ -3,7 +3,7 @@ import HeaderComponent from "./HeaderComponent";
 
 const LayoutComponent = () => {
   return (
-    <div className="p-4 flex flex-col min-h-screen">
+    <div className="py-4 px-6 flex flex-col min-h-screen">
       <HeaderComponent/>
       <Outlet/>
     </div>

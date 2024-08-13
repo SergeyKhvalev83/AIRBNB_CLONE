@@ -18,6 +18,7 @@ const NewPlacesFormPage = () => {
   const [checkOut, setCheckOut] = useState('');
   const [maxGuests, setMaxGuests] = useState(1);
   const [redirect, setRedirect] = useState('');
+  const [price, setPrice] = useState(100)
 
   const inputHeader = (text) => {
     return <h2 className="text-2xl mt-4">{text}</h2>;
@@ -49,12 +50,15 @@ const NewPlacesFormPage = () => {
       checkIn,
       checkOut,
       maxGuests,
+      price
     };
 
     if (id) {
       // to update existed place
       console.log("UPDATE: ", id)
       await axios.put(`/api/update-my-place/${id}`, { id, ...placeData });
+      setRedirect('/account/places');
+
     } else {
       // to add new place
       await axios.post('/api/post-my-places', placeData);
@@ -67,7 +71,7 @@ const NewPlacesFormPage = () => {
       return;
     }
     //we make that request ti set up all data in relevant fields in order to refactor it
-    axios.get(`/api/place/${id}`).then((response) => {
+    axios.get(`/api/my-place/${id}`).then((response) => {
       const { data } = response;
       setTitle(data.title);
       setAddress(data.address);
@@ -78,6 +82,8 @@ const NewPlacesFormPage = () => {
       setCheckIn(data.checkIn);
       setCheckOut(data.checkOut);
       setMaxGuests(data.maxGuests);
+      setPrice(data.price)
+
     });
   }, [id]);
 
@@ -132,7 +138,7 @@ const NewPlacesFormPage = () => {
           'Check in & out times',
           'add check in and out times, remember to have some time window for cleaning the room between guests',
         )}
-        <div className="grid gap-2 sm:grid-cols-3">
+        <div className="grid gap-2 sm:grid-cols-2 md:grid-cols-4">
           <div>
             <h3 className="mt-2 -mb-1">Check in time</h3>
             <input
@@ -162,6 +168,16 @@ const NewPlacesFormPage = () => {
               value={maxGuests}
               onChange={(e) => {
                 setMaxGuests(e.target.value);
+              }}
+            />
+          </div>
+          <div>
+            <h3 className="mt-2 -mb-1">Price per night</h3>
+            <input
+              type="number"
+              value={price}
+              onChange={(e) => {
+                setPrice(e.target.value);
               }}
             />
           </div>

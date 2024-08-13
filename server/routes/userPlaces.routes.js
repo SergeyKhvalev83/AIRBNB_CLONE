@@ -34,7 +34,9 @@ Router.post('/post-my-places', (req, res) => {
     checkIn,
     checkOut,
     maxGuests,
-  } = req.body.placeData;
+    price
+  } = req.body;
+  console.log(req.body)
   jwt.verify(token, jwtSecret, {}, async (err, user) => {
     if (err) throw err;
     try {
@@ -49,6 +51,7 @@ Router.post('/post-my-places', (req, res) => {
         checkIn,
         checkOut,
         maxGuests,
+        price
       });
       res.json(newPlace);
     } catch (err) {
@@ -58,7 +61,7 @@ Router.post('/post-my-places', (req, res) => {
 });
 
 //to get place data and populate form with data to make updating info easier
-Router.get('/place/:id', async (req, res) => {
+Router.get('/my-place/:id', async (req, res) => {
   try {
     const { id } = req.params;
     const place = await MyPlace.findById(id);
@@ -81,6 +84,7 @@ Router.put('/update-my-place/:id', async (req, res) => {
     checkIn,
     checkOut,
     maxGuests,
+    price
   } = req.body;
   try {
     jwt.verify(token, jwtSecret, {}, async (err, user) => {
@@ -102,6 +106,7 @@ Router.put('/update-my-place/:id', async (req, res) => {
             checkIn,
             checkOut,
             maxGuests,
+            price
           }) 
           .save();
         console.log(place);

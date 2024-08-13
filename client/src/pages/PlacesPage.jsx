@@ -44,18 +44,16 @@ const PlacesPage = () => {
                 className="flex cursor-pointer gap-4 bg-gray-100 p-4 rounded-2xl"
               >
                 <div>
-                  {eachPlace.photos.length > 0 &&
-                    eachPlace.photos.map((eachPhoto) => (
+                
                       <div
-                        key={eachPhoto}
                         className="flex justify-center w-32 h-32 bg-gray-300 shrink-0"
                       >
                         <img className='object-cover'
-                          src={`http://localhost:5001/uploads/${eachPhoto}`}
+                          src={`http://localhost:5001/uploads/${eachPlace.photos[0]}`}
                           alt="my-place-photo"
                         />
                       </div>
-                    ))}
+                 
                 </div>
                 <div className="text-justify">
                   <h2 className="text-xl">{eachPlace.title}</h2>

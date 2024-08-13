@@ -8,7 +8,8 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth/auth.routes');
 const userProfileToken = require('./routes/user.profile.routes');
 const uploadImgByLinkRoutes = require('./routes/uploads.routes');
-const myPlacesRoutes = require('./routes/myPlaces.routes');
+const userPlaces = require('./routes/userPlaces.routes');
+const allPlacesRoutes = require('./routes/places.router')
 
 const app = express();
 const PORT = 5001;
@@ -32,7 +33,8 @@ app.use('/uploads', express.static(pathToUploads));
 app.use('/api', authRoutes);
 app.use('/api', userProfileToken);
 app.use('/api', uploadImgByLinkRoutes);
-app.use('/api', myPlacesRoutes);
+app.use('/api', userPlaces);
+app.use('/api', allPlacesRoutes);
 
 app.listen(PORT, () => {
   console.log('Server listening on port 5001');

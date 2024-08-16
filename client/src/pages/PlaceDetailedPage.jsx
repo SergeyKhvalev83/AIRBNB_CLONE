@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import BookingWidget from '../components/BookingWidget';
 const PlaceDetailedPage = () => {
   const { id } = useParams();
   const [place, setPlace] = useState({});
@@ -21,9 +22,9 @@ const PlaceDetailedPage = () => {
       <div className="absolute inset-0 bg-black text-white min-h-screen">
         <div className="bg-black p-8 grid gap-4">
           <div>
-            <h2 className="text-3xl">Photos of {place.title}</h2>
+            <h2 className="text-3xl mr-40">Photos of {place.title}</h2>
             <button
-              className="fixed right-12 top-15 flex gap-1 py-2 px-4 rounded-2xl shadow shadow-black bg-white text-black"
+              className="fixed right-12 top-8 flex gap-1 py-2 px-4 rounded-2xl shadow shadow-black bg-white text-black"
               onClick={() => setShowAllPhotos(false)}
             >
               <svg
@@ -56,7 +57,7 @@ const PlaceDetailedPage = () => {
   }
 
   return (
-    <div className="mt-4 bg-gray-100 -mx-8 px-8 py-8">
+    <div className="mt-4 bg-gray-100 -mx-8 px-8 pt-8">
       <h1 className="text-3xl">{place.title}</h1>
       <a
         className="flex gap-1 my-3 block font-semibold underline"
@@ -91,28 +92,28 @@ const PlaceDetailedPage = () => {
             {place.photos?.[0] && (
               <div>
                 <img
-                  className="aspect-square object-cover"
+                  className="aspect-square object-cover cursor-pointer"
                   src={`http://localhost:5001/uploads/${place.photos?.[0]}`}
                   alt="photoOfPlace"
-                />
+                  onClick={()=>setShowAllPhotos(true)} />
               </div>
             )}
           </div>
           <div className="grid ">
             {place.photos?.[1] && (
               <img
-                className="aspect-square object-cover"
+                className="aspect-square object-cover cursor-pointer"
                 src={`http://localhost:5001/uploads/${place.photos?.[1]}`}
                 alt="photo of the place"
-              />
+             onClick={()=> {setShowAllPhotos(true)}} />
             )}
             <div className="overflow-hidden">
               {place.photos?.[2] && (
                 <img
-                  className="aspect-square object-cover relative top-2"
+                  className="aspect-square object-cover relative top-2 cursor-pointer"
                   src={`http://localhost:5001/uploads/${place.photos?.[2]}`}
                   alt="photo of the place"
-                />
+                 onClick={()=>setShowAllPhotos(true)}/>
               )}
             </div>
           </div>
@@ -136,6 +137,33 @@ const PlaceDetailedPage = () => {
           Show more photos
         </button>
       </div>
+      
+      <div className="mt-8 mb-8 grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr]">
+        
+        <div className='mb-8'>
+        <div className="my-4">
+        <h2 className="font-semibold text-2xl">Description</h2>
+        {place.description}
+      </div>
+          Check-in {place.checkIn} <br />
+          Check-out {place.checkOut} <br />
+          Max number of guests: {place.maxGuests}
+          
+        </div>
+        <div>
+        <BookingWidget place={place}/>
+        </div>
+      </div>
+      <div className='bg-white -mx-8 px-8 pt-1 pb-8 border-t'>
+        <div>
+      <h2 className="pt-4 font-semibold text-2xl">Extra info</h2>
+
+      </div>
+      <div className='mb-4 mt-1 text-sm text-gray-700 leading-5'>
+        {place.extraInfo}</div>
+      </div>
+
+      
     </div>
   );
 };

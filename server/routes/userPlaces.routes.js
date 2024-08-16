@@ -36,7 +36,6 @@ Router.post('/post-my-places', (req, res) => {
     maxGuests,
     price
   } = req.body;
-  console.log(req.body)
   jwt.verify(token, jwtSecret, {}, async (err, user) => {
     if (err) throw err;
     try {

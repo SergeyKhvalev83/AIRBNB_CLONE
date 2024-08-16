@@ -10,6 +10,7 @@ const userProfileToken = require('./routes/user.profile.routes');
 const uploadImgByLinkRoutes = require('./routes/uploads.routes');
 const userPlaces = require('./routes/userPlaces.routes');
 const allPlacesRoutes = require('./routes/places.router')
+const specPlaceRouter = require('./routes/spec.place.routes')
 
 const app = express();
 const PORT = 5001;
@@ -35,6 +36,7 @@ app.use('/api', userProfileToken);
 app.use('/api', uploadImgByLinkRoutes);
 app.use('/api', userPlaces);
 app.use('/api', allPlacesRoutes);
+app.use("/api", specPlaceRouter);
 
 app.listen(PORT, () => {
   console.log('Server listening on port 5001');

@@ -1,5 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import { differenceInCalendarDays } from 'date-fns';
+import axios from 'axios';
+import { UserContext } from '../context/UserContext';
+ 
+
 
 const BookingWidget = ({ place }) => {
   const [checkIn, setCheckIn] = useState('');
@@ -7,6 +12,18 @@ const BookingWidget = ({ place }) => {
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [fullName, setFullName] = useState('');
   const [mobile, setMobile] = useState('');
+  const [redirect, setRedirect] = useState('');
+  const { user } = useContext(UserContext);
+
+
+useEffect(()=>{
+  setFullName(user.name)
+},[user])
+
+  let numberOfNightsToBook = 0;
+  if (checkIn && checkOut) {
+    numberOfNightsToBook = differenceInCalendarDays(checkOut, checkIn);
+  }
 
   const checkInHandler = (ev) => {
     setCheckIn(ev.target.value);
@@ -28,9 +45,32 @@ const BookingWidget = ({ place }) => {
     setMobile(ev.target.value);
   };
 
-  let numberOfNightsToBook = 0;
-  if (checkIn && checkOut) {
-    numberOfNightsToBook = differenceInCalendarDays(checkOut, checkIn);
+  const bookingPlaceHangler = async () => {
+    try {
+      const responce = await axios.post('/api/booking', {
+        placeId: place._id,
+        checkIn,
+        checkOut,
+        numberOfGuests,
+        name: fullName,
+        phone: mobile,
+        price: numberOfNightsToBook * place.price,
+        booker: user._id,
+
+      });
+
+      const bookingId = responce.data._id;
+
+      if (bookingId) {
+        setRedirect(`/account/bookings/${bookingId}`);
+      }
+    } catch (err) {
+      console.log('ERROR TO SEND BOOKING INFO: ', err);
+    }
+  };
+
+  if (redirect) {
+    return <Navigate to={redirect} />;
   }
 
   return (
@@ -79,12 +119,12 @@ const BookingWidget = ({ place }) => {
         )}
       </div>
 
-      <button className="primary mt-4">
+      <button className="primary mt-4" onClick={bookingPlaceHangler}>
         Book this place
         {numberOfNightsToBook > 0 && (
-          <>
+          <div>
             <span> ${numberOfNightsToBook * place.price}</span>
-          </>
+          </div>
         )}
       </button>
     </div>

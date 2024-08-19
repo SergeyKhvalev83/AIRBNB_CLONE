@@ -7,7 +7,7 @@ import NavigationComponent from '../components/NavigationComponent';
 
 const AccountPage = () => {
   const [redirect, setRedirect] = useState(null);
-  const { user, setUser, ready, setReady } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   let { subpage } = useParams();
 
   if (subpage === undefined) {

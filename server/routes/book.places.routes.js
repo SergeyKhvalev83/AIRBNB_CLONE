@@ -13,7 +13,7 @@ Router.get('/all-bookings', async (req, res) => {
         if (err) {
           throw err;
         } else {
-          const bookings = await Booking.find({ booker: user.id }).populate('places');
+          const bookings = await Booking.find({ booker: user.id }).populate('placeId');
           console.log(bookings);
           res.status(200).json(bookings);
         }

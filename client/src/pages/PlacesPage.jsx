@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import NavigationComponent from '../components/NavigationComponent';
+import PlaceImgComponent from '../components/PlaceImgComponent';
 
 const PlacesPage = () => {
   const [myPlaces, setMyPlaces] = useState([]);
@@ -15,7 +16,6 @@ const PlacesPage = () => {
   return (
     <div>
       <NavigationComponent />
-
       <div className="text-center">
         <Link
           className="inline-flex gap-1 bg-primary text-white py-2 px-6 rounded-full "
@@ -44,16 +44,9 @@ const PlacesPage = () => {
                 className="flex cursor-pointer gap-4 bg-gray-100 p-4 rounded-2xl"
               >
                 <div>
-                
-                      <div
-                        className="flex justify-center w-32 h-32 bg-gray-300 shrink-0"
-                      >
-                        <img className='object-cover'
-                          src={`http://localhost:5001/uploads/${eachPlace.photos[0]}`}
-                          alt="my-place-photo"
-                        />
-                      </div>
-                 
+                  <div className="flex justify-center w-32 h-32 bg-gray-300 shrink-0">
+                    <PlaceImgComponent place={eachPlace} />
+                  </div>
                 </div>
                 <div className="text-justify">
                   <h2 className="text-xl">{eachPlace.title}</h2>

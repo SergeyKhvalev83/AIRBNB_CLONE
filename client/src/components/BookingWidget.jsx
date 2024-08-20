@@ -4,8 +4,6 @@ import { differenceInCalendarDays } from 'date-fns';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
  
-
-
 const BookingWidget = ({ place }) => {
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');

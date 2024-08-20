@@ -1,15 +1,11 @@
-import {} from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
 const NavigationComponent = () => {
   let { pathname } = useLocation();
-  console.log(pathname);
 
-  if(pathname === '/account/'){
-    pathname = "profile"
-    console.log("!!!", pathname)
+  if (pathname === '/account/') {
+    pathname = 'profile';
   }
-  
 
   const linkClasses = (type = null) => {
     let classes = 'py-2 px-6 inline-flex gap-1 rounded-full';

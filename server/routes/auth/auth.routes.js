@@ -17,9 +17,8 @@ Router.post('/login', async (req, res) => {
     if (user) {
       const passCompared = bcrypt.compareSync(password, user.password);
       if (passCompared) {
-        console.log('HERE');
-        const jwtToken =  jwt.sign(
-          { email: user.email, id: user._id},
+        const jwtToken = jwt.sign(
+          { email: user.email, id: user._id },
           jwtSecret,
         );
         res.status(200).cookie('token', jwtToken).json(user);
@@ -38,7 +37,6 @@ Router.post('/login', async (req, res) => {
 Router.post('/registry', async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    console.log(name, email, password);
     const bcrPass = bcrypt.hashSync(password, salt);
     const user = await User.create({
       name,
@@ -52,9 +50,8 @@ Router.post('/registry', async (req, res) => {
   }
 });
 
-
-Router.post("/logout", (req, res)=>{
-  res.cookie("token", "").json({message: "logout"})
-})
+Router.post('/logout', (req, res) => {
+  res.cookie('token', '').json({ message: 'logout' });
+});
 
 module.exports = Router;

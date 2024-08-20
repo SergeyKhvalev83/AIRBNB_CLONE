@@ -4,7 +4,6 @@ import { UserContext } from '../context/UserContext';
 
 const HeaderComponent = () => {
   const { user } = useContext(UserContext);
-  console.log("!!!!!!", user)
 
   return (
     <header className="flex justify-between">
@@ -49,7 +48,7 @@ const HeaderComponent = () => {
         </button>
       </div>
       <Link
-        to={ user? '/account': "/login"}
+        to={user ? '/account' : '/login'}
         className="flex flex items-centered gap-2 border border-color-gray-300 rounded-full py-2 px-4 "
       >
         <svg
@@ -81,9 +80,7 @@ const HeaderComponent = () => {
             />
           </svg>
         </div>
-        <div>
-        {user ? (`Hi ${user.name}`) : ('')}
-        </div>
+        <div>{user ? `Hi ${user.name}` : ''}</div>
       </Link>
     </header>
   );

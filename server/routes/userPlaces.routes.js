@@ -34,7 +34,7 @@ Router.post('/post-my-places', (req, res) => {
     checkIn,
     checkOut,
     maxGuests,
-    price
+    price,
   } = req.body;
   jwt.verify(token, jwtSecret, {}, async (err, user) => {
     if (err) throw err;
@@ -50,7 +50,7 @@ Router.post('/post-my-places', (req, res) => {
         checkIn,
         checkOut,
         maxGuests,
-        price
+        price,
       });
       res.json(newPlace);
     } catch (err) {
@@ -83,16 +83,13 @@ Router.put('/update-my-place/:id', async (req, res) => {
     checkIn,
     checkOut,
     maxGuests,
-    price
+    price,
   } = req.body;
   try {
     jwt.verify(token, jwtSecret, {}, async (err, user) => {
-      console.log(id);
-      console.log(user.id);
       const place = await MyPlace.findById(id);
 
       if (place.owner.toString() === user.id) {
-        console.log('CORRECT USER');
         const place = await MyPlace.findById(id);
         place
           .set({
@@ -105,11 +102,10 @@ Router.put('/update-my-place/:id', async (req, res) => {
             checkIn,
             checkOut,
             maxGuests,
-            price
-          }) 
+            price,
+          })
           .save();
-        console.log(place);
-        res.status(200).json({message: "OK"});
+        res.status(200).json({ message: 'OK' });
       }
     });
   } catch (err) {

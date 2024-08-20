@@ -20,7 +20,6 @@ Router.post('/upload-by-link', (req, res) => {
       dest: fullPath,
     })
     .then(({ filename }) => {
-      console.log(`Image saved to: ${newFileName}`);
       res.status(201).json(newFileName);
     });
 });
@@ -34,7 +33,7 @@ Router.post('/uploads', photosMiddleware.array('photos', 100), (req, res) => {
       const { path } = each;
       let newPath = path + '.jpg';
       fs.renameSync(each.path, newPath);
-      arraOfRanemedPhotos.push(newPath.replace('uploads\\', ""));
+      arraOfRanemedPhotos.push(newPath.replace('uploads\\', ''));
     }
     res.json(arraOfRanemedPhotos);
   } catch (err) {

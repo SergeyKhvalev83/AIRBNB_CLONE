@@ -8,12 +8,10 @@ import BookingDatesComponent from '../components/BookingDatesComponent';
 const BookingDatelesPage = () => {
   const [booking, setBooking] = useState([]);
   const { id } = useParams();
-  console.log('booking: ', booking);
 
   useEffect(() => {
     axios.get('/api/all-bookings').then((response) => {
       const currBooking = response.data.find(({ _id }) => _id === id);
-      console.log('!!!!!!!!!$$$: ', currBooking);
 
       if (currBooking) {
         setBooking(currBooking);
@@ -33,9 +31,9 @@ const BookingDatelesPage = () => {
           <h2 className="text-2xl mb-4">Your booking information</h2>
           <BookingDatesComponent eachBooking={booking.placeId} />
         </div>
-        <div className='bg-primary rounded-2xl text-white p-6'>
+        <div className="bg-primary rounded-2xl text-white p-6">
           <div>Total price:</div>
-          <div className='text-3xl'>${booking.price}</div>
+          <div className="text-3xl">${booking.price}</div>
         </div>
       </div>
       <PlaceGalleryWidget place={booking.placeId} />

@@ -1,13 +1,10 @@
-import {} from 'react';
-
-const PlaceImgComponent = ({place, index=0, className=null}) => {
- 
+const PlaceImgComponent = ({ place, index = 0, className = null }) => {
   if (!place?.photos.length) {
     return '';
   }
 
-  if(!className){
-    className="object-cover"
+  if (!className) {
+    className = 'object-cover';
   }
   return (
     <>

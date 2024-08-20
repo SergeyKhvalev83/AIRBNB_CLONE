@@ -13,8 +13,9 @@ Router.get('/all-bookings', async (req, res) => {
         if (err) {
           throw err;
         } else {
-          const bookings = await Booking.find({ booker: user.id }).populate('placeId');
-          console.log(bookings);
+          const bookings = await Booking.find({ booker: user.id }).populate(
+            'placeId',
+          );
           res.status(200).json(bookings);
         }
       });
@@ -36,8 +37,6 @@ Router.post('/booking', async (req, res) => {
       price,
       booker,
     } = req.body;
-
-    console.log(req.body);
     const booking = await Booking.create({
       placeId,
       checkIn,

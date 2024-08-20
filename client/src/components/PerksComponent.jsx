@@ -1,4 +1,3 @@
-import {} from 'react';
 
 const PerksComponent = ({ selected, onChange }) => {
   const checkBoxHandler = (ev) => {

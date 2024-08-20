@@ -20,14 +20,10 @@ const LoginPage = () => {
   const loginUserHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        '/api/login',
-        {
-          email,
-          password,
-        },
-        
-      );
+      const response = await axios.post('/api/login', {
+        email,
+        password,
+      });
       if (response.status === 200) {
         alert('Login successful');
         // const userParsed = response.json()

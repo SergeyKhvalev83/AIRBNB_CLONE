@@ -15,7 +15,6 @@ const PlaceDetailedPage = () => {
     }
     axios.get(`/api/certain-my-place/${id}`).then((responce) => {
       setPlace(responce.data);
-      console.log('PLACE', place);
     });
   }, [id]);
 

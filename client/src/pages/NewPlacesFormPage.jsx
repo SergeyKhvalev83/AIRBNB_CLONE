@@ -7,7 +7,6 @@ import NavigationComponent from '../components/NavigationComponent';
 
 const NewPlacesFormPage = () => {
   const { id } = useParams();
-  console.log('ID FROM PARAMS: ', id);
   const [title, setTitle] = useState('');
   const [address, setAddress] = useState('');
   const [addedPhotos, setAddedPhotos] = useState([]);
@@ -18,7 +17,7 @@ const NewPlacesFormPage = () => {
   const [checkOut, setCheckOut] = useState('');
   const [maxGuests, setMaxGuests] = useState(1);
   const [redirect, setRedirect] = useState('');
-  const [price, setPrice] = useState(100)
+  const [price, setPrice] = useState(100);
 
   const inputHeader = (text) => {
     return <h2 className="text-2xl mt-4">{text}</h2>;
@@ -50,15 +49,13 @@ const NewPlacesFormPage = () => {
       checkIn,
       checkOut,
       maxGuests,
-      price
+      price,
     };
 
     if (id) {
       // to update existed place
-      console.log("UPDATE: ", id)
       await axios.put(`/api/update-my-place/${id}`, { id, ...placeData });
       setRedirect('/account/places');
-
     } else {
       // to add new place
       await axios.post('/api/post-my-places', placeData);
@@ -82,8 +79,7 @@ const NewPlacesFormPage = () => {
       setCheckIn(data.checkIn);
       setCheckOut(data.checkOut);
       setMaxGuests(data.maxGuests);
-      setPrice(data.price)
-
+      setPrice(data.price);
     });
   }, [id]);
 

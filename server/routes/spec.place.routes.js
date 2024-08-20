@@ -6,7 +6,6 @@ Router.get('/certain-my-place/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const place = await Place.find({ _id: id });
-    console.log(place);
     res.status(200).json(place[0]);
   } catch (err) {
     console.log(

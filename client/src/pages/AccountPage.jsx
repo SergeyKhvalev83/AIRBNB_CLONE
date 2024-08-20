@@ -18,12 +18,7 @@ const AccountPage = () => {
     await axios.post('/api/logout');
     setUser(null);
     setRedirect('/');
-    console.log('redirect after logout ', redirect);
   };
-
-  // if (!ready) {
-  //   return 'loading...';
-  // }
 
   if (!user & !redirect) {
     //ready &&

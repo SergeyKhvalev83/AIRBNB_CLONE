@@ -1,4 +1,3 @@
-// import 'dotenv/config';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -23,7 +22,6 @@ const RegisterPage = () => {
   const registerUserHandler = async (e) => {
     e.preventDefault();
     try {
-      // console.log("ASS", process.env.SERVER_BASE_URL) // remove this after you've confirmed it is working
       await axios.post(`/api/registry`, {
         name,
         email,

@@ -14,13 +14,14 @@ const specPlaceRouter = require('./routes/spec.place.routes');
 const bookingRouter = require('./routes/book.places.routes');
 
 const app = express();
-// let PORT = process.env.PORT;
-// if (PORT == null || PORT == "") {
-//   PORT = 5001;
-// }
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  // origin: 'http://localhost:5173',
+  origin:"https://air-bnb-clone-mern-8157ba05deb7.herokuapp.com/",
   methods: 'GET,POST,PUT,DELETE,OPTIONS',
   credentials: true,
 };
@@ -43,6 +44,6 @@ app.use('/api', allPlacesRoutes);
 app.use('/api', specPlaceRouter);
 app.use('/api', bookingRouter);
 
-app.listen(process.env.PORT || 5000, () => {
-  console.log('Server listening on port 5001');
+app.listen(port, () => {
+  console.log(`Server listening on port 5001 ${port}`);
 });

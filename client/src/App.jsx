@@ -16,9 +16,12 @@ import PlaceDetailedPage from './pages/PlaceDetailedPage.jsx';
 import BookingDatelesPage from './pages/BookingDatelesPage.jsx'
 
 // axios.defaults.baseURL = 'http://localhost:5001';
-axios.defaults.baseURL = `https://air-bnb-clone-mern-8157ba05deb7.herokuapp.com`
+axios.defaults.baseURL = `https://air-bnb-clone-mern-8157ba05deb7.herokuapp.com:${import.meta.env.VITE_PORT}`;
 // axios.defaults.baseURL = 
-// axios.defaults.withCredentials = true;
+
+
+
+axios.defaults.withCredentials = true;
 
 function App() {
   return (

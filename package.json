@@ -1,12 +1,14 @@
+
 {
   "name": "airbnb_clone",
   "version": "1.0.0",
   "description": "Fullstack Booking App using MERN (mongo, express, react, node)",
   "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "start": "node index.js"
+    "start":"nodemon --watch server --exec server/index.js",
+    "server": "nodemon server/index.js",
+    "client": "npm start --prefix client",
+    "heroku-postbuild":"NPM_CONFIG+PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "",

@@ -14,10 +14,10 @@ const specPlaceRouter = require('./routes/spec.place.routes');
 const bookingRouter = require('./routes/book.places.routes');
 
 const app = express();
-let PORT = process.env.PORT;
-if (PORT == null || PORT == "") {
-  PORT = 5001;
-}
+// let PORT = process.env.PORT;
+// if (PORT == null || PORT == "") {
+//   PORT = 5001;
+// }
 
 const corsOptions = {
   origin: 'http://localhost:5173',
@@ -43,6 +43,6 @@ app.use('/api', allPlacesRoutes);
 app.use('/api', specPlaceRouter);
 app.use('/api', bookingRouter);
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log('Server listening on port 5001');
 });

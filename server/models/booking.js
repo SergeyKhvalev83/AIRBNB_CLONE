@@ -16,4 +16,4 @@ const Booking = new Schema({
   price: { type: Number, require: true },
 });
 
-module.exports = mongoose.model("bookings", Booking);
+module.exports = mongoose.model('bookings', Booking);

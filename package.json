@@ -1,0 +1,14 @@
+{
+  "name": "airbnb_clone",
+  "version": "1.0.0",
+  "description": "Fullstack Booking App using MERN (mongo, express, react, node)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

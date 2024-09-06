@@ -14,7 +14,10 @@ const specPlaceRouter = require('./routes/spec.place.routes');
 const bookingRouter = require('./routes/book.places.routes');
 
 const app = express();
-const PORT = 5001;
+let PORT = process.env.PORT;
+if (PORT == null || PORT == "") {
+  PORT = 5001;
+}
 
 const corsOptions = {
   origin: 'http://localhost:5173',

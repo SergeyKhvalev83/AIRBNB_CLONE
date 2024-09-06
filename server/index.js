@@ -45,5 +45,5 @@ app.use('/api', specPlaceRouter);
 app.use('/api', bookingRouter);
 
 app.listen(port, () => {
-  console.log(`Server listening on port 5001 ${port}`);
+  console.log(`Server listening on port ${port}`);
 });

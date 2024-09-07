@@ -8,10 +8,23 @@ import BookingDatesComponent from '../components/BookingDatesComponent';
 const MyBookingsPage = () => {
   const [myBookings, setMyBookings] = useState([]);
 
+  // useEffect(() => {
+  //   axios.get('/api/all-bookings').then((responce) => {
+  //     setMyBookings(responce.data);
+  //   });
+  // }, []);
+
+
   useEffect(() => {
-    axios.get('/api/all-bookings').then((responce) => {
-      setMyBookings(responce.data);
-    });
+    axios.get('/api/all-bookings')
+      .then(({ data }) => {
+        // Ensure data is an array
+        setMyBookings(Array.isArray(data) ? data : []);
+      })
+      .catch(error => {
+        console.error('MybookingsPage API call failed:', error);
+        setMyBookings([]); // Fallback to empty array on error
+      });
   }, []);
 
   return (

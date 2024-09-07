@@ -3,6 +3,9 @@
   "name": "airbnb_clone",
   "version": "1.0.0",
   "description": "Fullstack Booking App using MERN (mongo, express, react, node)",
+  "engines": {
+    "node": "v20.12.2"
+  },
   "main": "index.js",
 "scripts": {
     "client-install": "npm install --prefix client",

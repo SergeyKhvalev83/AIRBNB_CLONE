@@ -48,10 +48,9 @@ app.use(helmet.contentSecurityPolicy({
 }));
 
 
-
 const corsOptions = {
   // origin: 'http://localhost:5173',
-  origin: 'https://air-bnb-clone-mern-8157ba05deb7.herokuapp.com/',
+  origin: "https://air-bnb-clone-mern-8157ba05deb7.herokuapp.com",
   methods: 'GET,POST,PUT,DELETE,OPTIONS',
   credentials: true,
 };

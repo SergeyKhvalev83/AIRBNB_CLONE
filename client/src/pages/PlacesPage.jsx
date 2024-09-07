@@ -17,6 +17,7 @@ const PlacesPage = () => {
     axios.get('/api/my-places')
       .then(({ data }) => {
         // Ensure data is an array
+        console.log(data)
         setMyPlaces(Array.isArray(data) ? data : []);
       })
       .catch(error => {

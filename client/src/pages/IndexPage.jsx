@@ -5,9 +5,24 @@ import axios from 'axios';
 const IndexPage = () => {
   const [allPlaces, setAllPlaces] = useState([]);
 
+  // useEffect(() => {
+  //   axios.get('/api/places').then(({ data }) => setAllPlaces(data));
+  // }, []);
+
+
   useEffect(() => {
-    axios.get('/api/places').then(({ data }) => setAllPlaces(data));
+    axios.get('/api/places')
+      .then(({ data }) => {
+        // Ensure data is an array
+        setAllPlaces(Array.isArray(data) ? data : []);
+      })
+      .catch(error => {
+        console.error('API call failed:', error);
+        setAllPlaces([]); // Fallback to empty array on error
+      });
   }, []);
+  
+
 
   return (
     <div className=" mt-8 grid gap-x-6 gap-y-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

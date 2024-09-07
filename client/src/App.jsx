@@ -1,4 +1,3 @@
-import 'dotenv/config'
 
 import { Routes, Route } from 'react-router-dom';
 import './App.css';

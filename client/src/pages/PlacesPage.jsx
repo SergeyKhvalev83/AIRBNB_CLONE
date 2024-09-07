@@ -7,11 +7,24 @@ import PlaceImgComponent from '../components/PlaceImgComponent';
 const PlacesPage = () => {
   const [myPlaces, setMyPlaces] = useState([]);
 
+  // useEffect(() => {
+  //   axios.get('/api/my-places').then(({ data }) => {
+  //     setMyPlaces(data);
+  //   });
+  // }, []);
+
   useEffect(() => {
-    axios.get('/api/my-places').then(({ data }) => {
-      setMyPlaces(data);
-    });
+    axios.get('/api/my-places')
+      .then(({ data }) => {
+        // Ensure data is an array
+        setMyPlaces(Array.isArray(data) ? data : []);
+      })
+      .catch(error => {
+        console.error('Place page API call failed:', error);
+        setMyPlaces([]); // Fallback to empty array on error
+      });
   }, []);
+
 
   return (
     <div>

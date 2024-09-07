@@ -17,13 +17,11 @@ const IndexPage = () => {
         setAllPlaces(Array.isArray(data) ? data : []);
       })
       .catch(error => {
-        console.error('API call failed:', error);
+        console.error('IndexPage API call failed:', error);
         setAllPlaces([]); // Fallback to empty array on error
       });
   }, []);
   
-
-
   return (
     <div className=" mt-8 grid gap-x-6 gap-y-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {allPlaces.length > 0 &&

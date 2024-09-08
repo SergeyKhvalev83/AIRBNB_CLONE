@@ -14,6 +14,7 @@ Router.get('/my-places', (req, res) => {
       const myPlaces = await MyPlace.find({
         owner: user.id,
       });
+      console.log(myPlaces)
       res.status(200).json(myPlaces);
     } catch (err) {
       console.log('ERROR TO FIND ALL MY PLACES IN DB: ', err);

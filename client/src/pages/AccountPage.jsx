@@ -10,9 +10,9 @@ const AccountPage = () => {
   const { user, setUser } = useContext(UserContext);
   let { subpage } = useParams();
 
-  if (subpage === undefined) {
-    subpage = 'profile';
-  }
+  // if (subpage === undefined) {
+  //   subpage = 'profile';
+  // }
 
   const logoutHandler = async () => {
     await axios.post('/api/logout');

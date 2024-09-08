@@ -14,11 +14,11 @@ Router.get('/profile', (req, res) => {
         throw err;
       } else {
         const { name, email, _id } = await User.findById(user.id);
-        res.json({ name, email, _id });
+        res.status(200).json({ name, email, _id });
       }
     });
   } else {
-    res.json(null);
+    res.status(401).json(null);
   }
 });
 

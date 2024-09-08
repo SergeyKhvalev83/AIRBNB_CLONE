@@ -7,8 +7,10 @@ const jwtSecret = 'SergeyKatEv';
 
 Router.get('/profile', (req, res) => {
   const { token } = req.cookies;
-
+console.log("CHECK TOKEN")
   if (token) {
+    console.log("CHECK TOKEN FOUND")
+
     jwt.verify(token, jwtSecret, {}, async (err, user) => {
       if (err) {
         throw err;
@@ -18,6 +20,8 @@ Router.get('/profile', (req, res) => {
       }
     });
   } else {
+    console.log("CHECK NO TOKEN")
+
     res.status(401).json(null);
   }
 });

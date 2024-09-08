@@ -31,7 +31,7 @@ const MyBookingsPage = () => {
     <div>
       <NavigationComponent />
       Bookings page
-      {myBookings.length > 0 &&
+      {myBookings?.length > 0 &&
         myBookings.map((eachBooking) => (
           <Link
             to={`/account/bookings/${eachBooking._id}`}

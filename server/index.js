@@ -34,13 +34,7 @@ mongoose.connect(process.env.CONNECTION_STRING).then((res) => console.log('Conne
 //   });
 // }
 
-if (process.env.NODE_ENV === 'production') {
-  // app.use('/', express.static('../client/dist'));
-  app.use('/', express.static(path.resolve(__dirname, '../client/dist')));//!!!!!!!!!
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
-  });
-}
+
 
 
 
@@ -69,13 +63,23 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 app.use('/uploads', express.static(pathToUploads));
 
-app.use('/api', authRoutes);
-app.use('/api', userProfileToken);
-app.use('/api', uploadImgByLinkRoutes);
-app.use('/api', userPlaces);
-app.use('/api', allPlacesRoutes);
-app.use('/api', specPlaceRouter);
-app.use('/api', bookingRouter);
+app.use('/api/', authRoutes);
+app.use('/api/', userProfileToken);
+app.use('/api/', uploadImgByLinkRoutes);
+app.use('/api/', userPlaces);
+app.use('/api/', allPlacesRoutes);
+app.use('/api/', specPlaceRouter);
+app.use('/api/', bookingRouter);
+
+
+if (process.env.NODE_ENV === 'production') {
+  // app.use('/', express.static('../client/dist'));
+  app.use('/', express.static(path.resolve(__dirname, '../client/dist')));//!!!!!!!!!
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
+  });
+}
+
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

@@ -31,7 +31,9 @@ const IndexPage = () => {
               {eachPlace.photos?.[0] && (
                 <img
                   className="rounded-2xl object-cover aspect-square"
-                  src={`http://localhost:5001/uploads/${eachPlace.photos[0]}`}
+                  // src={`http://localhost:5001/uploads/${eachPlace.photos[0]}`}
+                  src={`/uploads/${eachPlace.photos[0]}`}
+
                   alt="place photo"
                 />
               )}

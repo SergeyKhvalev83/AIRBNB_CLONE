@@ -32,7 +32,9 @@ const PlaceGalleryWidget = ({ place }) => {
             place.photos.map((eachPhoto) => (
               <div key={eachPhoto}>
                 <img
-                  src={`http://localhost:5001/uploads/${eachPhoto}`}
+                  // src={`http://localhost:5001/uploads/${eachPhoto}`}
+                  src={`/uploads/${eachPhoto}`}
+
                   alt="photo of the place"
                 />
               </div>
@@ -50,7 +52,8 @@ const PlaceGalleryWidget = ({ place }) => {
             <div>
               <img
                 className="aspect-square object-cover cursor-pointer"
-                src={`http://localhost:5001/uploads/${place.photos?.[0]}`}
+                // src={`http://localhost:5001/uploads/${place.photos?.[0]}`}
+                src={`/uploads/${place.photos?.[0]}`}
                 alt="photoOfPlace"
                 onClick={() => setShowAllPhotos(true)}
               />
@@ -61,7 +64,8 @@ const PlaceGalleryWidget = ({ place }) => {
           {place.photos?.[1] && (
             <img
               className="aspect-square object-cover cursor-pointer"
-              src={`http://localhost:5001/uploads/${place.photos?.[1]}`}
+              // src={`http://localhost:5001/uploads/${place.photos?.[1]}`}
+              src={`/uploads/${place.photos?.[1]}`}
               alt="photo of the place"
               onClick={() => {
                 setShowAllPhotos(true);
@@ -72,7 +76,8 @@ const PlaceGalleryWidget = ({ place }) => {
             {place.photos?.[2] && (
               <img
                 className="aspect-square object-cover relative top-2 cursor-pointer"
-                src={`http://localhost:5001/uploads/${place.photos?.[2]}`}
+                // src={`http://localhost:5001/uploads/${place.photos?.[2]}`}
+                src={`/uploads/${place.photos?.[2]}`}
                 alt="photo of the place"
                 onClick={() => setShowAllPhotos(true)}
               />

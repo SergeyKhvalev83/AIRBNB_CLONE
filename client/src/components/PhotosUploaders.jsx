@@ -74,7 +74,8 @@ const PhotosUploaders = ({ addedPhotos, onChange }) => {
             >
               <img
                 className="rounded-2xl w-full object-cover"
-                src={`http://localhost:5001/uploads/${eachPhotoName}`}
+                // src={`http://localhost:5001/uploads/${eachPhotoName}`}
+                 src={`/uploads/${eachPhotoName}`}
                 alt="photoOfPlace"
               />
               <button

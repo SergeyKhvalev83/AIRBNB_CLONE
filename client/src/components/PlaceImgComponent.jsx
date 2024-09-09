@@ -10,7 +10,9 @@ const PlaceImgComponent = ({ place, index = 0, className = null }) => {
     <>
       <img
         className={className}
-        src={`http://localhost:5001/uploads/${place.photos[index]}`}
+        // src={`http://localhost:5001/uploads/${place.photos[index]}`}
+        src={`/uploads/${place.photos[index]}`}
+
         alt="my-place-photo"
       />
     </>

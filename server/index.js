@@ -21,6 +21,11 @@ if (port == null || port == '') {
   port = 8000;
 }
 
+mongoose.connect(process.env.CONNECTION_STRING).then((res) => console.log('Connected to DB'))
+.catch((err) => console.log(err));
+
+
+
 // if (process.env.NODE_ENV === 'production') {
 //   app.use('/', express.static('client/build'));
 
@@ -55,7 +60,6 @@ const corsOptions = {
   credentials: true,
 };
 
-mongoose.connect(process.env.CONNECTION_STRING);
 const pathToUploads = path.resolve(path.resolve(__dirname, 'uploads'));
 
 app.use(cors(corsOptions));

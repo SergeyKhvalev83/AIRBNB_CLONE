@@ -5,13 +5,16 @@ export const UserContext = createContext({});
 
 export function UserContextProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [ready, setReady] = useState(false)
+  const [ready, setReady] = useState(false);
 
-  useEffect(() => { //to check if cookie token presented (to keep login) in case browser refresh
+  useEffect(() => {
+    //to check if cookie token presented (to keep login) in case browser refresh
     if (!user) {
-      axios.get('/api/profile').then(({data}) => {
-        setUser(data);
-        setReady(true)
+      axios.get('/api/profile').then(({ data }) => {
+        if (data !== undefined) {
+          setUser(data);
+          setReady(true);
+        }
       });
     }
   }, []);
